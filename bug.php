@@ -1,0 +1,23 @@
+```php
+<?php
+function increment_array_value(&$arr, $key) {
+  if (!isset($arr[$key])) {
+    $arr[$key] = 0; 
+  }
+  $arr[$key]++;
+}
+
+$my_array = [];
+increment_array_value($my_array, 'count');
+echo $my_array['count']; // Outputs 1
+increment_array_value($my_array, 'count');
+echo $my_array['count']; // Outputs 2
+
+//The unexpected behavior happens when using this function with a nested array
+$nested_array = ['a' => ['count' => 0]];
+increment_array_value($nested_array['a'], 'count');
+echo $nested_array['a']['count']; // Outputs 1 (as expected)
+increment_array_value($nested_array['a'], 'count');
+echo $nested_array['a']['count']; //Outputs 1 (unexpected)
+?>
+```
